@@ -2,7 +2,7 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
 
-function SearchBar({ setResults ,text}) {
+function SearchBar({ setResults }) {
   const [input, setInput] = useState("");
 
   const fetchApi = async (value) => {
@@ -10,6 +10,7 @@ function SearchBar({ setResults ,text}) {
     const json = await res.json();
     let results = json.filter((data) => {
       if (value) {
+        value = value.toLowerCase()
         if (data.name.toLowerCase().includes(value)) {
           return data;
         }
@@ -26,7 +27,7 @@ function SearchBar({ setResults ,text}) {
     <div className="search-bar">
       <FaSearch className="icon" />
       <input
-        value={text?text:input}
+        value={input}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Type to search....."
         className="bar"
